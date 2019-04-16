@@ -23,21 +23,25 @@ class SearchContainer extends Component {
   searchBooks = query => {
     API.search(query)    
       .then(res => this.setState({ result: res.data }))
+      // .then(res => console.log(query))
+      .then(res => console.log({BookDetail}))
       .catch(err => console.log(err));      
   };
 
   handleInputChange = event => {
-    const value = event.target.value;
-    const name = event.target.name;
+    let value = event.target.value;
+    let name = event.target.name;
     this.setState({
       [name]: value
     });
+    // console.log(value);
   };
 
-  // When the form is submitted, search the OMDB API for the value of `this.state.search`
+  // When the form is submitted, search the Google Books API for the value of `this.state.search`
   handleFormSubmit = event => {
     event.preventDefault();
     this.searchBooks(this.state.search);
+    // console.log(this.state.search);
   };
 
   render() {

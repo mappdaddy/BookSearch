@@ -6,7 +6,8 @@ const APIKEY = "inauthor:keyes&key=AIzaSyDZ2a5XVdx41slTElC63F4QwX7YbvICNFc";
 // const APIKEY = "&apikey=trilogy";
 
 export default {
-  search: function(query) {
+  
+  search: function(query) { 
     return axios.get(BASEURL + query + APIKEY);  
      
   }
