@@ -18,7 +18,7 @@ class SearchContainer extends Component {
 
   // When this component mounts, search for the movie "The Matrix"
   componentDidMount() {
-    this.searchBooks('Harry Potter')
+    this.searchBooks('love in the time of cholera')
   }
 
   searchBooks = query => {
@@ -67,7 +67,7 @@ class SearchContainer extends Component {
                 />
               </Card>
             </Col>
-            <Col size="lg-12">
+            <Col size="lg-12" mb='3'>
               <Card
                 heading={((this.state.result.length > 0) ? this.state.result[0].volumeInfo.title : "Search for a Book to Begin")}
               >
@@ -75,21 +75,23 @@ class SearchContainer extends Component {
                 {this.state.result.length > 0 ? (
                   this.state.result.map(book => (
                     // console.log(book.id)
-                    <div className="margin">
-                    <Card >
+                    // <div className="margin">
+                    
+
                     <BookDetail 
                     // props = {book}
                       key={book.id}
-                      // id={result.id}                  
+                      // id={book.id}                  
 
                       title={book.volumeInfo.title}                   
-                      src={book.volumeInfo.imageLinks.smallThumbnail}
+                      src={book.volumeInfo.imageLinks !== undefined ? book.volumeInfo.imageLinks.smallThumbnail : null}
                       authors={book.volumeInfo.authors}
                       description={book.volumeInfo.description}
-                    
+                      // imageLinks
+                      // smallThumbnail
                     />
-                    </Card>
-                    </div>
+                   
+                    // </div>
                   ))
                 ) : (
                     <h3>No Results to Display</h3>
