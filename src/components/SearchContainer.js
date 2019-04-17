@@ -77,7 +77,9 @@ class SearchContainer extends Component {
                     // console.log(book.id)
                     // <div className="margin">
                     
-
+                    <Card className= "margin"
+                    heading={book.volumeInfo.title}
+                    >
                     <BookDetail 
                     // props = {book}
                       key={book.id}
@@ -90,6 +92,7 @@ class SearchContainer extends Component {
                       // imageLinks
                       // smallThumbnail
                     />
+                    </Card>
                    
                     // </div>
                   ))
