@@ -5,9 +5,14 @@ import React from "react";
 
 function Col(props) {
   const size = props.size.split(" ").map(size => "col-" + size).join(" ");
+  let classes = size;
+  if (props.mb){
+    classes += ' mb-' + props.mb
+  }
+  // console.log('Col Class Names', classes)
 
   return (
-    <div className={size}>
+    <div className={classes}>
       {props.children}
     </div>
   );

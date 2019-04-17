@@ -9,6 +9,7 @@ import Card from "./Card";
 import BookDetail from "./BookDetail";
 import API from "../utils/API";
 
+
 class SearchContainer extends Component {
   state = {
     result: [],
@@ -17,15 +18,20 @@ class SearchContainer extends Component {
 
   // When this component mounts, search for the movie "The Matrix"
   componentDidMount() {
-    this.searchBooks("Harry Potter");
+    this.searchBooks('Harry Potter')
   }
 
   searchBooks = query => {
-    API.search(query)    
-      .then(res => this.setState({ result: res.data }))
-      // .then(res => console.log(query))
-      .then(res => console.log({BookDetail}))
-      .catch(err => console.log(err));      
+    //replace spaces here
+    query = query.replace(/ /g, "_");
+    API.search(query).then((res) => {
+      this.setState({ result: res.data.items })
+      console.log(this.state.result)
+    })
+    // .catch(err => console.log(err));
+    // .then(res => this.setState({ result: res.data }))
+    // // .then(res => console.log(res.data ))
+
   };
 
   handleInputChange = event => {
@@ -51,33 +57,39 @@ class SearchContainer extends Component {
         <Jumbotron />
         <Container>
           <Row>
-            <Col size="md-8">
-              <Card
-                heading={this.state.result.title || "Search for a Book to Begin"}
-              >
-                {this.state.result.title ? (
-                  <BookDetail
-                    // key={result.id}
-                    // id={result.id}                  
 
-                    title={this.state.result.volumeInfo.title}
-                    src={this.state.result.Poster}
-                    authors={this.state.result.volumeInfo.authors}
-                    description={this.state.result.volumeInfo.description}
-                    released={this.state.result.Released}
-                  />
-                ) : (
-                    <h3>No Results to Display</h3>
-                  )}
-              </Card>
-            </Col>
-            <Col size="md-4">
+            <Col size="lg-12" mb='3'>
               <Card heading="Search">
                 <SearchForm
                   value={this.state.search}
                   handleInputChange={this.handleInputChange}
                   handleFormSubmit={this.handleFormSubmit}
                 />
+              </Card>
+            </Col>
+            <Col size="lg-12">
+              <Card
+                heading={((this.state.result.length > 0) ? this.state.result[0].volumeInfo.title : "Search for a Book to Begin")}
+              >
+
+                {this.state.result.length > 0 ? (
+                  this.state.result.map(book => (
+                    // console.log(book.id)
+                    <BookDetail 
+                    // props = {book}
+                      key={book.id}
+                      // id={result.id}                  
+
+                      title={book.volumeInfo.title}                   
+                      src={book.volumeInfo.imageLinks.smallThumbnail}
+                      authors={book.volumeInfo.authors}
+                      description={book.volumeInfo.description}
+
+                    />
+                  ))
+                ) : (
+                    <h3>No Results to Display</h3>
+                )}
               </Card>
             </Col>
           </Row>
