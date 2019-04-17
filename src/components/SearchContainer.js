@@ -75,6 +75,8 @@ class SearchContainer extends Component {
                 {this.state.result.length > 0 ? (
                   this.state.result.map(book => (
                     // console.log(book.id)
+                    <div className="margin">
+                    <Card >
                     <BookDetail 
                     // props = {book}
                       key={book.id}
@@ -84,8 +86,10 @@ class SearchContainer extends Component {
                       src={book.volumeInfo.imageLinks.smallThumbnail}
                       authors={book.volumeInfo.authors}
                       description={book.volumeInfo.description}
-
+                    
                     />
+                    </Card>
+                    </div>
                   ))
                 ) : (
                     <h3>No Results to Display</h3>
