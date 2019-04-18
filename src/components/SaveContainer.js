@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import Container from "./Container";
-import Row from "./Row";
-import Col from "./Col";
-import Navbar from "./Navbar";
-import Jumbotron from "./Jumbotron";
-import Card from "./Card";
-import BookDetail from "./BookDetail";
+// import Container from "./Container";
+// import Row from "./Row";
+// import Col from "./Col";
+// import Navbar from "./Navbar";
+// import Jumbotron from "./Jumbotron";
+// import Card from "./Card";
+// import BookDetail from "./BookDetail";
 import API from "../utils/API";
 
 class SaveContainer extends Component {
@@ -20,11 +20,11 @@ class SaveContainer extends Component {
 
   displaySavedBooks = query => {
     query = query.replace(/ /g, "_");
-    API.getSavedBooks()
+    API.getSavedBooks().then((res) => {
     this.setState({ result: res.data.items })
       .catch(err => console.log(err));
     // console.log(this.state.result)
-  };
+  })
 
 };
 
@@ -73,7 +73,8 @@ render() {
         </Row>
           </Container>
         </div>
-      )
+      );
+            }
 };
 
 
